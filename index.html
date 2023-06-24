@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cuberdle </title>
+</head>
+
+<link href="styles.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body>
+    <h1>Cuberdle (beta)
+        <button id="infoButton" class="infoButton"> <i class="fa fa-question-circle"></i> </button>
+    </h1>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>How to play</h1>
+            <br></br>
+            <h3>Guess a final WCA competitor by guessing other competitors and gaining hints on how close they are to the answer!</h3>
+            <br></br>
+            <input type="button" class="box3" value="This box means you are quite far from the answer">
+            <input type="button" class="box2" value="This box means you are pretty close to the answer">
+            <input type="button" class="box" value="This box means you are almost or exactly right!">
+            <br></br>
+            <br></br>
+            <h3>For bugs and questions, please email cubemasterofficial@gmail.com. Hope you enjoy the game!</h3>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("infoButton").onclick = function() {
+            document.getElementById("myModal").style.display = "block";
+        }
+        document.getElementsByClassName("close")[0].onclick = function() {
+            document.getElementById("myModal").style.display = "none";
+        }
+    </script>
+
+    <h2>WCA Cuber Guessing Game</h2>
+    <br></br>
+    <h3>Guess this WCA competitor</h3>
+    <br></br>
+
+    <script src="main.js"></script>
+
+    <script>
+        start();
+    </script>
+
+    <div class="inputbox">
+        <form onSubmit="return false;">
+            <input list="options" type="text" id="search-input" name="ans" placeholder="Guess 1/6" autocomplete="off" style="height: .5in; font-size: 14pt; font-family: Lucida Sans, Lucida Sans Regular , Lucida Grande , Lucida Sans Unicode , Geneva, Verdana, sans-serif">
+            <datalist id="options">
+                <option value="">
+                <option value="">
+                <option value="">
+                <option value="">
+                <option value="">
+            </datalist>
+            <input type="button" class="button" onclick="
+                addRow(document.getElementById('search-input').value); 
+                document.getElementById('search-input').value = '';
+                for(let i = 0; i < 5; i++){
+                    var opt= document.getElementById('options').options[i];
+                    opt.value = '';
+                    opt.text = '';
+                }"
+            value="Guess">
+        </form>
+
+        <script>
+            var req = 0;
+
+            var input = document.getElementById("search-input");
+            input.addEventListener("keyup", function (event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    addRow(document.getElementById('search-input').value); 
+                    document.getElementById('search-input').value = '';
+                    for(let i = 0; i < 5; i++){
+                        var opt= document.getElementById('options').options[i];
+                        opt.value = '';
+                        opt.text = '';
+                    }
+                }
+            });
+
+            input.addEventListener("keypress", function(e) {
+                var link = "https://www.worldcubeassociation.org/api/v0/persons?q=" + document.getElementById('search-input').value;
+                fetch(link)
+                .then(res => {
+                    return res.json();
+                })
+                .then(data => {
+                    var counter = 0
+                    data.forEach(user => {
+                        if(counter == 5){
+                            return;
+                        }
+                        console.log(user.person.name)
+                        var opt= document.getElementById('options').options[counter];
+                        opt.value = user.person.wca_id;
+                        opt.text = user.person.name;
+                        counter++;
+                    });
+                    console.log("-------------------------")
+                })
+                .catch(error => console.log(error));
+
+            });
+        </script>
+
+    </div>
+
+    <br></br>
+
+    <table id="table" class="center">
+        <tr>  
+            <td><input type="button" class="title" value="Name"></td>
+            <td><input type="button" class="title" value="WCA Year"></td>
+            <td><input type="button" class="title" value="Country"></td>
+            <td><input type="button" class="title" value="3x3 PR"></td>
+            <td><input type="button" class="title" value="Best Rank"></td>
+            <td><input type="button" class="title" value="# of Comps"></td>
+        </tr>
+    </table>
+
+
+</body>
