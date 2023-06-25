@@ -9,3 +9,5 @@ https://samuelfang.github.io/Cuberdle/
 - Table scrolling
 - Use WCA pictures
 - Animations
+- Correct answer modal
+- Reset search each time
