@@ -609,7 +609,7 @@ function addRow(id){
     }
     if(id == identity){
         correct();
-        guesses = 6;
+        guesses = -1;
         return;
     }
     if(guesses < 7){
@@ -749,6 +749,7 @@ function correct(){
         cell6.innerHTML = `<td><input type="button" class="box" value="Correct! ${comps}"></td>`;
     })
     guesses = -1;
+    document.getElementsByName("ans")[0].placeholder = "You win!";
 }
 
 function isValid(id){
