@@ -8,3 +8,4 @@ https://samuelfang.github.io/Cuberdle/
 - More customization
 - Table scrolling
 - Use WCA pictures
+- Animations
