@@ -35,6 +35,11 @@
         document.getElementsByClassName("close")[0].onclick = function() {
             document.getElementById("myModal").style.display = "none";
         }
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("myModal")) {
+                document.getElementById("myModal").style.display = "none";
+            }
+        }
     </script>
 
     <h2>WCA Cuber Guessing Game</h2>
@@ -57,57 +62,58 @@
                 <option value="">
                 <option value="">
                 <option value="">
+                <option value="">
             </datalist>
-            <input type="button" class="button" onclick="
-                addRow(document.getElementById('search-input').value); 
-                document.getElementById('search-input').value = '';
-                for(let i = 0; i < 5; i++){
-                    var opt= document.getElementById('options').options[i];
-                    opt.value = '';
-                    opt.text = '';
-                }"
+            <input type="button" class="button" onclick="enter(true)"
             value="Guess">
+            <input type="button" class="button" onclick="enter(false)"
+            value="Search">
         </form>
 
         <script>
-            var req = 0;
-
-            var input = document.getElementById("search-input");
-            input.addEventListener("keyup", function (event) {
-                if (event.keyCode === 13) {
+            function enter(bool){
+                if (isValid(document.getElementById('search-input').value) && bool) {
                     event.preventDefault();
                     addRow(document.getElementById('search-input').value); 
                     document.getElementById('search-input').value = '';
-                    for(let i = 0; i < 5; i++){
-                        var opt= document.getElementById('options').options[i];
-                        opt.value = '';
-                        opt.text = '';
-                    }
                 }
-            });
-
-            input.addEventListener("keypress", function(e) {
-                var link = "https://www.worldcubeassociation.org/api/v0/persons?q=" + document.getElementById('search-input').value;
-                fetch(link)
-                .then(res => {
-                    return res.json();
-                })
-                .then(data => {
-                    var counter = 0
-                    data.forEach(user => {
-                        if(counter == 5){
-                            return;
-                        }
-                        console.log(user.person.name)
-                        var opt= document.getElementById('options').options[counter];
-                        opt.value = user.person.wca_id;
-                        opt.text = user.person.name;
-                        counter++;
-                    });
-                    console.log("-------------------------")
-                })
-                .catch(error => console.log(error));
-
+                else{
+                    var link = "https://www.worldcubeassociation.org/api/v0/persons?q=" + document.getElementById('search-input').value;
+                    fetch(link)
+                    .then(res => {
+                        return res.json();
+                    })
+                    .then(data => {
+                        var counter = 0
+                        data.forEach(user => {
+                            if(counter == 6){
+                                return;
+                            }
+                            console.log(user.person.name)
+                            var opt= document.getElementById('options').options[counter];
+                            var repeat = false;
+                            for(var i = 0; i < counter; i++){
+                                if(document.getElementById('options').options[i].value == user.person.wca_id){
+                                    repeat = true;
+                                }
+                            }
+                            if(!repeat){
+                                opt.value = user.person.wca_id;
+                                opt.text = user.person.name;
+                            }
+                            counter++;
+                            console.log(opt.value)
+                        });
+                        console.log("-------------------------")
+                    })
+                    .catch(error => console.log(error));
+                }
+            }
+            var input = document.getElementById("search-input");
+            input.addEventListener("keyup", function (event) {
+                if (event.keyCode === 13) {
+                    enter(true);
+                }
             });
         </script>
 
