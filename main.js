@@ -572,6 +572,9 @@ function start(){
         }
         identity = data.person.wca_id;
         answer = data.person.name;
+        document.getElementById("answerName").innerHTML = answer + " (" + identity + ")";
+        document.getElementById('avatar').src = data.person.avatar.url;
+        document.getElementById("link").setAttribute("href",data.person.url);
         year = data.person.wca_id.substring(0,4);
         if(data.person.country != null){
             cont = data.person.country.continentId;
@@ -724,6 +727,8 @@ function showAnswer(){
         cell5.innerHTML = `<td><input type="button" class="box4" value="Answer: ${rank}"></td>`;
         cell6.innerHTML = `<td><input type="button" class="box4" value="Answer: ${comps}"></td>`;
     })
+    document.getElementById("finalMessage").innerHTML = "Incorrect! Answer:";
+    document.getElementById("statsModal").style.display = "block"
 }
 
 function correct(){
@@ -749,7 +754,9 @@ function correct(){
         cell6.innerHTML = `<td><input type="button" class="box" value="Correct! ${comps}"></td>`;
     })
     guesses = -1;
+    document.getElementById("finalMessage").innerHTML = "Correct! Answer:";
     document.getElementsByName("ans")[0].placeholder = "You win!";
+    document.getElementById("statsModal").style.display = "block"
 }
 
 function isValid(id){

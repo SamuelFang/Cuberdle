@@ -32,14 +32,24 @@ h3 {
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
+h4 {
+  color: black;
+  font-size: 20px;
+  margin: 0;
+  background-color: white;
+  margin-right: 10%;
+  margin-left: 10%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
 .button {
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     font-size: x-large;
     background-color: gray;
-    width: 1in;
     height: .5in;
     white-space: normal;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2), 0 2px 4px 0 rgba(0,0,0,0.19);
+    white-space:nowrap;
 }
 
 .button:hover{
@@ -143,4 +153,14 @@ h3 {
     font-size: 50px;
     cursor: pointer;
     border-width : 0
+  }
+
+  img {
+    height: 350px;
+    object-fit: contain;
+  }
+
+  a{
+    color: black;
+    text-decoration: none;
   }
