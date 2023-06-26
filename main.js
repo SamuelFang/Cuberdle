@@ -7,6 +7,8 @@ var cont;
 var pr;
 var rank;
 var comps;
+var seed;
+var clipboard;
 
 items=[
     "2018WANG35",
@@ -132,30 +134,6 @@ items=[
     "2015FUSH01",
     "2017BRYA06",
     "2017CHOI07",
-    "2017KOLI01",
-    "2015ROSE01",
-    "2016HUNG08",
-    "2014GERB01",
-    "2012QUIB01",
-    "2015CHER07",
-    "2015DIZO02",
-    "2016SCHO08",
-    "2010KIPA01",
-    "2016CHAP04",
-    "2015MINK04",
-    "2013ANAN03",
-    "2016GUTI23",
-    "2017SWAI01",
-    "2015KOEN01",
-    "2017SIAU02",
-    "2013SUCH02",
-    "2017GARR05",
-    "2013EGDA01",
-    "2013SAVA01",
-    "2016RIDL01",
-    "2016HOLM04",
-    "2012CAMP03",
-    "2014BAND04",
     "2016SIGG01",
     "2015CHEN49",
     "2011BANS02",
@@ -180,30 +158,6 @@ items=[
     "2017KOLI01",
     "2018LEED01",
     "2017FENG10",
-    "2007HABE01",
-    "2007STRE01",
-    "2006MOND01",
-    "2007HUGH01",
-    "2007HESS01",
-    "2008COOK01",
-    "2007LIME01",
-    "2006GUZE01",
-    "2005KOCZ01",
-    "2007GOTA01",
-    "2007ENDR01",
-    "2007BOUR01",
-    "2006BUUS01",
-    "2004GALL02",
-    "2006CEAU01",
-    "2007LOPE01",
-    "2003POCH01",
-    "2004NOOR01",
-    "2007ROKA01",
-    "2005BATI01",
-    "2008SOLD01",
-    "2006BONN01",
-    "2007YUAL01",
-    "2007BODO01",
     "2012PARK03",
     "2015CHEA01",
     "2017TUNG13",
@@ -398,32 +352,6 @@ items=[
     "2018CREE01",
     "2018NIEU01",
     "2016SHAW02",
-    "2009WANG13",
-    "2009CHUN07",
-    "2009ASBR01",
-    "2009JIAN12",
-    "2010KRYU01",
-    "2010KIPA01",
-    "2010PRAB02",
-    "2007JAME01",
-    "2009CHOW05",
-    "2009DICK01",
-    "2007JAKU01",
-    "2007MING01",
-    "2010PANK01",
-    "2010VILL02",
-    "2008BODO01",
-    "2006HALC01",
-    "2009BUIH02",
-    "2010YANX02",
-    "2011LINB01",
-    "2012ZHAO05",
-    "2009WUBI01",
-    "2008BRAN01",
-    "2007PERG01",
-    "2007HIRA03",
-    "2009MOCH01",
-    "2010ROON01",
     "2018LOPE22",
     "2013HUAN30",
     "2016YONG02",
@@ -448,31 +376,6 @@ items=[
     "2018KUCZ01",
     "2015MILL01",
     "2016ZHAN45",
-    "2009WANG13",
-    "2010PULC01",
-    "2006KUTI01",
-    "2010UGLO01",
-    "2012FIED01",
-    "2010WANG52",
-    "2007HORV01",
-    "2005BATI01",
-    "2012WANG53",
-    "2011DERS01",
-    "2011WANG19",
-    "2010GOLD01",
-    "2009LEFE01",
-    "2007KEZH01",
-    "2010JIMO01",
-    "2010PRAB02",
-    "2010XUEF01",
-    "2009YANG24",
-    "2011JAEM01",
-    "2008HUAY01",
-    "2010RUGA01",
-    "2010FUGU01",
-    "2009TANX01",
-    "2007BODO01",
-    "2012ZHAO05",
     "2015BROW03",
     "2015GORN01",
     "2018HIBS01",
@@ -552,7 +455,52 @@ items=[
 ]
 
 function start(){
-    var item = items[Math.floor(Math.random()*items.length)];
+    if(localStorage.getItem("games") == null){
+        localStorage.setItem("games", 1);
+    }
+    else{
+        localStorage.setItem("games",parseInt(localStorage.getItem("games")) + 1);
+    }
+    if(localStorage.getItem("wins") == null){
+        localStorage.setItem("wins", 0);
+    }
+    if(localStorage.getItem("streak") == null){
+        localStorage.setItem("streak", 0);
+    }
+    if(localStorage.getItem("longest") == null){
+        localStorage.setItem("longest", 0);
+    }
+    if(localStorage.getItem("one") == null){
+        localStorage.setItem("one", 0);
+    }
+    if(localStorage.getItem("two") == null){
+        localStorage.setItem("two", 0);
+    }
+    if(localStorage.getItem("three") == null){
+        localStorage.setItem("three", 0);
+    }
+    if(localStorage.getItem("four") == null){
+        localStorage.setItem("four", 0);
+    }
+    if(localStorage.getItem("five") == null){
+        localStorage.setItem("five", 0);
+    }
+    if(localStorage.getItem("six") == null){
+        localStorage.setItem("six", 0);
+    }
+    document.getElementById("games").innerHTML = localStorage.getItem("games");
+    document.getElementById("wins").innerHTML = localStorage.getItem("wins");
+    document.getElementById("streak").innerHTML = localStorage.getItem("streak");
+    document.getElementById("longest").innerHTML = localStorage.getItem("longest");
+    document.getElementById("one").innerHTML = localStorage.getItem("one");
+    document.getElementById("two").innerHTML = localStorage.getItem("two");
+    document.getElementById("three").innerHTML = localStorage.getItem("three");
+    document.getElementById("four").innerHTML = localStorage.getItem("four");
+    document.getElementById("five").innerHTML = localStorage.getItem("five");
+    document.getElementById("six").innerHTML = localStorage.getItem("six");
+    seed = Math.floor(Math.random()*items.length)
+    var item = items[seed];
+    clipboard = "Cuberdle #" + seed + '\n';
     var link = "https://www.worldcubeassociation.org/api/v0/persons/" + item;
     fetch(link)
     .then(res => {
@@ -601,6 +549,7 @@ function empty(guesses){
     cell4.innerHTML = `<td><input type="button" class="box3" value=""></td>`;
     cell5.innerHTML = `<td><input type="button" class="box3" value=""></td>`;
     cell6.innerHTML = `<td><input type="button" class="box3" value=""></td>`;
+    write("white");
     if(guesses == -1){
         showAnswer();
     }
@@ -610,7 +559,7 @@ function addRow(id){
     if(guesses == -1){
         return;
     }
-    if(id == identity){
+    if(id.toUpperCase() == identity.toUpperCase()){
         correct();
         guesses = -1;
         return;
@@ -620,7 +569,6 @@ function addRow(id){
     }
     document.getElementsByName("ans")[0].placeholder = "Guess " + guesses + "/6";
     if(guesses == 7){
-        //console.log(answer, year, country, pr, rank, comps);
         guesses = -1;
         document.getElementsByName("ans")[0].placeholder = "Game Over!";
     }
@@ -698,6 +646,12 @@ function addRow(id){
         cell4.innerHTML = `<td><input type="button" class="${box4}" value="${data.personal_records[333].single.best/100}"></td>`;
         cell5.innerHTML = `<td><input type="button" class="${box5}" value="${bestRank}"></td>`;
         cell6.innerHTML = `<td><input type="button" class="${box6}" value="${data.competition_count}"></td>`;
+        write(box2);
+        write(box3);
+        write(box4);
+        write(box5);
+        write(box6);
+        clipboard += '\n';
         if(guesses == -1){
             showAnswer()
         }
@@ -720,15 +674,17 @@ function showAnswer(){
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
         var cell6 = row.insertCell(5);
-        cell1.innerHTML = `<td><input type="button" class="box4" value="Answer: ${answer}"></td>`;
-        cell2.innerHTML = `<td><input type="button" class="box4" value="Answer: ${year}"></td>`;
-        cell3.innerHTML = `<td><input type="button" class="box4" value="Answer: ${country}"></td>`;
-        cell4.innerHTML = `<td><input type="button" class="box4" value="Answer: ${pr}"></td>`;
-        cell5.innerHTML = `<td><input type="button" class="box4" value="Answer: ${rank}"></td>`;
-        cell6.innerHTML = `<td><input type="button" class="box4" value="Answer: ${comps}"></td>`;
+        cell1.innerHTML = `<td><input type="button" class="box4" onClick='document.getElementById("statsModal").style.display = "block";' value="Answer: ${answer}"></td>`;
+        cell2.innerHTML = `<td><input type="button" class="box4" onClick='document.getElementById("statsModal").style.display = "block";' value="Answer: ${year}"></td>`;
+        cell3.innerHTML = `<td><input type="button" class="box4" onClick='document.getElementById("statsModal").style.display = "block";' value="Answer: ${country}"></td>`;
+        cell4.innerHTML = `<td><input type="button" class="box4" onClick='document.getElementById("statsModal").style.display = "block";' value="Answer: ${pr}"></td>`;
+        cell5.innerHTML = `<td><input type="button" class="box4" onClick='document.getElementById("statsModal").style.display = "block";' value="Answer: ${rank}"></td>`;
+        cell6.innerHTML = `<td><input type="button" class="box4" onClick='document.getElementById("statsModal").style.display = "block";' value="Answer: ${comps}"></td>`;
     })
     document.getElementById("finalMessage").innerHTML = "Incorrect! Answer:";
-    document.getElementById("statsModal").style.display = "block"
+    document.getElementById("statsModal").style.display = "block";
+    localStorage.setItem("streak", "0");
+    document.getElementById("streak").innerHTML = localStorage.getItem("streak");
 }
 
 function correct(){
@@ -746,13 +702,45 @@ function correct(){
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
         var cell6 = row.insertCell(5);
-        cell1.innerHTML = `<td><input type="button" class="box" value="Correct! ${answer}"></td>`;
-        cell2.innerHTML = `<td><input type="button" class="box" value="Correct! ${year}"></td>`;
-        cell3.innerHTML = `<td><input type="button" class="box" value="Correct! ${country}"></td>`;
-        cell4.innerHTML = `<td><input type="button" class="box" value="Correct! ${pr}"></td>`;
-        cell5.innerHTML = `<td><input type="button" class="box" value="Correct! ${rank}"></td>`;
-        cell6.innerHTML = `<td><input type="button" class="box" value="Correct! ${comps}"></td>`;
+        cell1.innerHTML = `<td><input type="button" class="box" onClick='document.getElementById("statsModal").style.display = "block";' value="Correct! ${answer}"></td>`;
+        cell2.innerHTML = `<td><input type="button" class="box" onClick='document.getElementById("statsModal").style.display = "block";' value="Correct! ${year}"></td>`;
+        cell3.innerHTML = `<td><input type="button" class="box" onClick='document.getElementById("statsModal").style.display = "block";' value="Correct! ${country}"></td>`;
+        cell4.innerHTML = `<td><input type="button" class="box" onClick='document.getElementById("statsModal").style.display = "block";' value="Correct! ${pr}"></td>`;
+        cell5.innerHTML = `<td><input type="button" class="box" onClick='document.getElementById("statsModal").style.display = "block";' value="Correct! ${rank}"></td>`;
+        cell6.innerHTML = `<td><input type="button" class="box" onClick='document.getElementById("statsModal").style.display = "block";' value="Correct! ${comps}"></td>`;
+        write("green");
     })
+    localStorage.setItem("streak",parseInt(localStorage.getItem("streak")) + 1);
+    if(localStorage.getItem("streak") > localStorage.getItem("longest")){
+        localStorage.setItem("longest",localStorage.getItem("streak"));
+    }
+    if(guesses == 1){
+        localStorage.setItem("one",parseInt(localStorage.getItem("one")) + 1);
+    }
+    if(guesses == 2){
+        localStorage.setItem("two",parseInt(localStorage.getItem("one")) + 1);
+    }
+    if(guesses == 3){
+        localStorage.setItem("three",parseInt(localStorage.getItem("one")) + 1);
+    }
+    if(guesses == 4){
+        localStorage.setItem("four",parseInt(localStorage.getItem("one")) + 1);
+    }
+    if(guesses == 5){
+        localStorage.setItem("five",parseInt(localStorage.getItem("one")) + 1);
+    }
+    if(guesses == 6){
+        localStorage.setItem("six",parseInt(localStorage.getItem("one")) + 1);
+    }
+    document.getElementById("wins").innerHTML = localStorage.getItem("wins");
+    document.getElementById("streak").innerHTML = localStorage.getItem("streak");
+    document.getElementById("longest").innerHTML = localStorage.getItem("longest");
+    document.getElementById("one").innerHTML = localStorage.getItem("one");
+    document.getElementById("two").innerHTML = localStorage.getItem("two");
+    document.getElementById("three").innerHTML = localStorage.getItem("three");
+    document.getElementById("four").innerHTML = localStorage.getItem("four");
+    document.getElementById("five").innerHTML = localStorage.getItem("five");
+    document.getElementById("six").innerHTML = localStorage.getItem("six");
     guesses = -1;
     document.getElementById("finalMessage").innerHTML = "Correct! Answer:";
     document.getElementsByName("ans")[0].placeholder = "You win!";
@@ -782,4 +770,29 @@ function isValid(id){
         return false;
     }
     return true;
+}
+
+function share(){
+    if(!clipboard.endsWith("Cuberdle")){
+        clipboard += "samuelfang.github.io/Cuberdle"
+    }
+    navigator.clipboard.writeText(clipboard);
+}
+
+function write(type){
+    if(type == "white"){
+        clipboard += "WWWWW" + '\n';
+    }
+    if(type == "green"){
+        clipboard += "GGGGG" + '\n';
+    }
+    if(type == "box"){
+        clipboard += "G";
+    }
+    if(type == "box2"){
+        clipboard += "Y";
+    }
+    if(type == "box3"){
+        clipboard += "W";
+    }
 }

@@ -16,7 +16,7 @@
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h1>How to play</h1>
+            <h1>How to play <i class="fa fa-question-circle"></i></h1>
             <br></br>
             <h3>Guess a final WCA competitor by guessing other competitors and gaining hints on how close they are to the answer!</h3>
             <br></br>
@@ -34,13 +34,37 @@
             <span class="close">&times;</span>
             <h1><span id="finalMessage"></span></h1>
             <h3><span id="answerName"></span></h3>
-            <img id="avatar" class="avatar">
-            <h3><a id="link">WCA Profile</a></h3>
             <br></br>
-            <input type="button" class="button" onclick=""
+            <img id="avatar" class="avatar">
+            <h3><a id="link" target="_blank" rel="noopener noreferrer">WCA Profile</a></h3>
+            <br></br>
+            <input type="button" class="button" onclick="share();"
             value="Share">
-            <input type="button" class="button" onclick=""
+            <input type="button" class="button" onclick="location.reload();"
             value="Play Again">
+        </div>
+    </div>
+
+    <div id="answerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>Statistics <i class="fa fa-bar-chart"></i></h1>
+            <br></br>
+            <h3>Games Played: <span id="games"></span></h3>
+            <h3>Wins: <span id="wins"></span></h3>
+            <h3>Win Streak: <span id="streak"></span></h3>
+            <h3>Longest Win Streak: <span id="longest"></span></h3>
+            <br></br>
+            <h3>Guess Distribution: </h3>
+            <h4>1: <span id="one"></span> time(s)</h4>
+            <h4>2: <span id="two"></span> time(s)</h4>
+            <h4>3: <span id="three"></span> time(s)</h4>
+            <h4>4: <span id="four"></span> time(s)</h4>
+            <h4>5: <span id="five"></span> time(s)</h4>
+            <h4>6: <span id="six"></span> time(s)</h4>
+            <br></br>
+            <input type="button" class="button" onclick="share();"
+            value="Share">
         </div>
     </div>
 
@@ -49,7 +73,7 @@
             document.getElementById("infoModal").style.display = "block";
         }
         document.getElementById("statsButton").onclick = function() {
-            document.getElementById("statsModal").style.display = "block";
+            document.getElementById("answerModal").style.display = "block";
         }
 
         var modals = document.querySelectorAll('.modal');
@@ -119,7 +143,6 @@
                             if(counter == 6){
                                 return;
                             }
-                            console.log(user.person.name)
                             var opt= document.getElementById('options').options[counter];
                             var repeat = false;
                             for(var i = 0; i < counter; i++){
@@ -132,9 +155,7 @@
                                 opt.text = user.person.name;
                             }
                             counter++;
-                            console.log(opt.value)
                         });
-                        console.log("-------------------------")
                     })
                     .catch(error => console.log(error));
                 }

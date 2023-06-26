@@ -7,7 +7,6 @@ https://samuelfang.github.io/Cuberdle/
 - Cuberdle of the day
 - More customization
 - Table scrolling
-- Use WCA pictures
 - Animations
 - Correct answer modal
 - Reset search each time
