@@ -714,23 +714,24 @@ function correct(){
     if(localStorage.getItem("streak") > localStorage.getItem("longest")){
         localStorage.setItem("longest",localStorage.getItem("streak"));
     }
+    localStorage.setItem("wins",parseInt(localStorage.getItem("wins")) + 1);
     if(guesses == 1){
         localStorage.setItem("one",parseInt(localStorage.getItem("one")) + 1);
     }
     if(guesses == 2){
-        localStorage.setItem("two",parseInt(localStorage.getItem("one")) + 1);
+        localStorage.setItem("two",parseInt(localStorage.getItem("two")) + 1);
     }
     if(guesses == 3){
-        localStorage.setItem("three",parseInt(localStorage.getItem("one")) + 1);
+        localStorage.setItem("three",parseInt(localStorage.getItem("three")) + 1);
     }
     if(guesses == 4){
-        localStorage.setItem("four",parseInt(localStorage.getItem("one")) + 1);
+        localStorage.setItem("four",parseInt(localStorage.getItem("four")) + 1);
     }
     if(guesses == 5){
-        localStorage.setItem("five",parseInt(localStorage.getItem("one")) + 1);
+        localStorage.setItem("five",parseInt(localStorage.getItem("five")) + 1);
     }
     if(guesses == 6){
-        localStorage.setItem("six",parseInt(localStorage.getItem("one")) + 1);
+        localStorage.setItem("six",parseInt(localStorage.getItem("six")) + 1);
     }
     document.getElementById("wins").innerHTML = localStorage.getItem("wins");
     document.getElementById("streak").innerHTML = localStorage.getItem("streak");

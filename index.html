@@ -11,6 +11,7 @@
     <h1>Cuberdle (beta)
         <button id="statsButton" class="infoButton"> <i class="fa fa-bar-chart"></i> </button>
         <button id="infoButton" class="infoButton"> <i class="fa fa-question-circle"></i> </button>
+        <button id="settingsButton" class="infoButton"> <i class="fa fa-gear"></i> </button>
     </h1>
 
     <div id="infoModal" class="modal">
@@ -20,8 +21,8 @@
             <br></br>
             <h3>Guess a final WCA competitor by guessing other competitors and gaining hints on how close they are to the answer!</h3>
             <br></br>
-            <input type="button" class="box3" value="This box means you are quite far from the answer">
-            <input type="button" class="box2" value="This box means you are pretty close to the answer">
+            <input type="button" class="box3" value="This box means you are quite far from the answer.">
+            <input type="button" class="box2" value="This box means you are pretty close to the answer.">
             <input type="button" class="box" value="This box means you are almost or exactly right!">
             <br></br>
             <br></br>
@@ -45,6 +46,22 @@
         </div>
     </div>
 
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>Settings <i class="fa fa-gear"></i></h1>
+            <br></br>
+            <h3>Reset Stats (can't be undone)
+                <input type="button" class="button" onclick="
+                    localStorage.clear();
+                    location.reload();
+                    "
+                value="Confirm Reset">
+            </h3>
+            
+        </div>
+    </div>
+
     <div id="answerModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -63,8 +80,6 @@
             <h4>5: <span id="five"></span> time(s)</h4>
             <h4>6: <span id="six"></span> time(s)</h4>
             <br></br>
-            <input type="button" class="button" onclick="share();"
-            value="Share">
         </div>
     </div>
 
@@ -74,6 +89,9 @@
         }
         document.getElementById("statsButton").onclick = function() {
             document.getElementById("answerModal").style.display = "block";
+        }
+        document.getElementById("settingsButton").onclick = function() {
+            document.getElementById("settingsModal").style.display = "block";
         }
 
         var modals = document.querySelectorAll('.modal');
