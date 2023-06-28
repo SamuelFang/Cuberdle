@@ -711,7 +711,7 @@ function correct(){
         write("green");
     })
     localStorage.setItem("streak",parseInt(localStorage.getItem("streak")) + 1);
-    if(localStorage.getItem("streak") > localStorage.getItem("longest")){
+    if(parseInt(localStorage.getItem("streak")) > parseInt(localStorage.getItem("longest"))){
         localStorage.setItem("longest",localStorage.getItem("streak"));
     }
     localStorage.setItem("wins",parseInt(localStorage.getItem("wins")) + 1);
