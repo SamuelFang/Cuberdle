@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <body>
-    <h1>Cuberdle (beta)
+    <h1>Cuberdle
         <button id="statsButton" class="infoButton"> <i class="fa fa-bar-chart"></i> </button>
         <button id="infoButton" class="infoButton"> <i class="fa fa-question-circle"></i> </button>
         <button id="settingsButton" class="infoButton"> <i class="fa fa-gear"></i> </button>
@@ -58,7 +58,23 @@
                     "
                 value="Confirm Reset">
             </h3>
-            
+            <br></br>
+            <h3>Use Custom List</h3>
+            <h3>
+                <input type="text" id="list" placeholder="Custom List" autocomplete="off" style="height: .5in; font-size: 14pt; font-family: Lucida Sans, Lucida Sans Regular , Lucida Grande , Lucida Sans Unicode , Geneva, Verdana, sans-serif">
+                <input type="button" class="button" onclick="
+                    start(document.getElementById('list').value);
+                    for (var index in modals) {
+                        if (typeof modals[index].style !== 'undefined') modals[index].style.display = 'none';    
+                    }
+                    document.getElementById('list').value = '';
+                    "
+                value="Play">
+            </h3>
+            <h4>separate WCA IDs with commas</h4>
+            <h4>ex: 2012PARK03, 2015DUYU01</h4>
+            <br></br>
+            <h4>Make sure to use valid WCA IDs to avoid bugging the site.</h4>
         </div>
     </div>
 
@@ -116,13 +132,13 @@
 
     <h2>WCA Cuber Guessing Game</h2>
     <br></br>
-    <h3>Guess this WCA competitor</h3>
-    <br></br>
+    <!-- <h3>Guess this WCA competitor</h3>
+    <br></br> -->
 
     <script src="main.js"></script>
 
     <script>
-        start();
+        start("");
     </script>
 
     <div class="inputbox">

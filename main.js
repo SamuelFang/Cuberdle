@@ -454,12 +454,9 @@ items=[
     "2017WONP01"
 ]
 
-function start(){
+function start(input){
     if(localStorage.getItem("games") == null){
-        localStorage.setItem("games", 1);
-    }
-    else{
-        localStorage.setItem("games",parseInt(localStorage.getItem("games")) + 1);
+        localStorage.setItem("games", 0);
     }
     if(localStorage.getItem("wins") == null){
         localStorage.setItem("wins", 0);
@@ -498,6 +495,9 @@ function start(){
     document.getElementById("four").innerHTML = localStorage.getItem("four");
     document.getElementById("five").innerHTML = localStorage.getItem("five");
     document.getElementById("six").innerHTML = localStorage.getItem("six");
+    if(input != ""){
+        items = input.split(",")
+    }
     seed = Math.floor(Math.random()*items.length)
     var item = items[seed];
     clipboard = "Cuberdle #" + seed + '\n';
@@ -556,6 +556,9 @@ function empty(guesses){
 }
 
 function addRow(id){
+    if(guesses == 1){
+        localStorage.setItem("games",parseInt(localStorage.getItem("games")) + 1);
+    }
     if(guesses == -1){
         return;
     }
