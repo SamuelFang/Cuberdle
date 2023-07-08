@@ -499,6 +499,11 @@ function start(input){
         items = input.split(",")
     }
     seed = Math.floor(Math.random()*items.length)
+    const queryString = window.location.search;
+    if(queryString.length > 0){
+        const urlParams = new URLSearchParams(queryString);
+        seed = parseInt(urlParams.get('id'));
+    }
     var item = items[seed];
     clipboard = "Cuberdle #" + seed + '\n';
     var link = "https://www.worldcubeassociation.org/api/v0/persons/" + item;
@@ -778,7 +783,7 @@ function isValid(id){
 
 function share(){
     if(!clipboard.endsWith("Cuberdle")){
-        clipboard += "samuelfang.github.io/Cuberdle"
+        clipboard += "samuelfang.github.io/Cuberdle/index.html?id=" + seed
     }
     navigator.clipboard.writeText(clipboard);
 }
